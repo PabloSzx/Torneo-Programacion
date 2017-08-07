@@ -15,26 +15,46 @@ class Partido {
   }
 
   public int quienGana() {
-    while (puntosJota <= puntos || puntosNelman <= puntos) {
-      System.out.println("while");
+    int i = 0;
+    while (puntosJota < puntos && puntosNelman < puntos) {
       if (quienParte == 1) {
         if (rachasJota == 0) {
-          puntosJota += 1;
+          puntosNelman += 1;
         } else {
-          puntosJota += rachasJota;
+          i = 0;
+          while (i < (rachasJota)) {
+            puntosJota += 1;
+            if (puntosJota == puntos) {
+              break;
+            }
+            i++;
+          }
+          if (puntosJota != puntos) {
+            puntosNelman += 1;
+          }
         }
         quienParte = 2;
-      } else {
+      } else if (quienParte == 2) {
         if (rachasNelman == 0) {
           puntosJota += 1;
         } else {
-          puntosNelman += rachasNelman;
+          i = 0;
+          while (i < (rachasNelman)) {
+            puntosNelman += 1;
+            if (puntosNelman == puntos) {
+              break;
+            }
+            i++;
+          }
+          if (puntosNelman != puntos) {
+            puntosJota += 1;
+          }
         }
         quienParte = 1;
       }
     }
 
-    return puntosJota >= puntos ? 1 : 2;
+    return puntosJota == puntos ? 1 : 2;
   }
   public static void main(String[] args) {
     Scanner keyboard = new Scanner(System.in);
